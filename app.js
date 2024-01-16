@@ -14,6 +14,9 @@ var adminRouter = require('./routes/admin');
 
 
 var app = express();
+app.get("/ping", (req,res)=> {
+  res.send("test api working")
+  })
 
 //cors enabled here
 app.use(cors());
@@ -29,7 +32,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
@@ -38,6 +40,8 @@ app.use('/admin', adminRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
